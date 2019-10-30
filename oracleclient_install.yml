@@ -1,4 +1,4 @@
-- hosts: ora-x1
+- hosts: mh-oracleDB2
   user: root
   
   roles:
