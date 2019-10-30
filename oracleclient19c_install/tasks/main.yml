@@ -5,7 +5,7 @@
       - 'Oracle Client19c Software Installation in progress at {{ansible_date_time.iso8601}}:'
 
 - name: create required directories
-  when: inventory_hostname in groups['ora-x1']
+  when: inventory_hostname in groups['mh-oracleDB2.techlab.com']
   remote_user: "{{ root_user }}"
   file:
     path="{{ item }}"
