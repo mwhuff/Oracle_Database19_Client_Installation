@@ -42,7 +42,7 @@
   become: yes
   become_user: "{{ oracle_user }}"
   unarchive:
-     src={{ stage_dir }}/LINUX.X64_193000_client.zip
+     src={{ stage_dir }}/LINUX.X64_193000_db_home.zip
      dest="{{ oracleclient_home }}"
      remote_src=no
      mode=0755
@@ -73,7 +73,7 @@
   tags:
    - oc19c_softwareinstall
 
-- name: Validate Oracle Client Software Installation
+- name: Validate Oracle Database Software Installation
   when: inventory_hostname in groups['mh-oracleDB2']
   remote_user: "{{ root_user }}"
   become: yes
@@ -89,7 +89,7 @@
     msg: "{{ ocl_softversion.stdout_lines }}" 
   when: inventory_hostname in groups['mh-oracleDB2']
 
-- name: set profile entry for the client software
+- name: set profile entry for the database software
   when: inventory_hostname in groups['mh-oracleDB2']
   remote_user: "{{ root_user }}"
   become: yes
@@ -144,7 +144,7 @@
   debug:
     msg:
       - 'This playbook completed below task for Single Instance at {{ansible_date_time.iso8601}}:'
-      - '- Install oracle client to the listed servers of ora-x1 groups'
+      - '- Install oracle database to the listed servers of mh-oracleDB2 groups'
       - '- Modify tnsnames.ora and sqlnet.ora based on the business requirements'
       - '- Validate connection using EZconnect (sqlplus username/password@server/SID)'
       - '- END OF ALL: git clone of oracleclient19c_install repository will be shared'
